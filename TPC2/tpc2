@@ -1,0 +1,22 @@
+import sys
+
+def main():
+    is_summing = True  # variável que indica se estamos somando ou não
+    result = 0  # variável que guarda o resultado da soma
+    for line in sys.stdin:
+        line = line.strip()
+        if not is_summing:  # se não estivermos somando, procuramos por "On"
+            if "On" in line.lower():
+                is_summing = True
+        elif "Off" in line.lower():  # se estivermos somando, procuramos por "Off"
+            is_summing = False
+        else:  # se não encontramos "On" nem "Off", procuramos por sequências de dígitos
+            for word in line.split():
+                if word.isdigit():
+                    result += int(word)
+        if "=" in line:  # se encontramos "=", imprimimos o resultado e resetamos a variável
+            print(result)
+            result = 0
+
+if __name__ == '__main__':
+    main()
